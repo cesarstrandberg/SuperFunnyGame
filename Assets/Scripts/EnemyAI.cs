@@ -13,8 +13,9 @@ public class EnemyAI : MonoBehaviour
     public float walkSpeed = 3.5f;
     public float runSpeed = 8.0f;
     public float runDistance = 2.5f;
-    public float attackDistance = 1.1f;
+    public float attackDistance = 1.2f;
     public float attackRate = 1.5f;
+    public float enemyDamage = 15f;
 
     private float nextAttackTime = 0f;
     private bool isDead = false;
@@ -24,18 +25,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (isDead) return;
 
-        // --- EXPERT-FIXEN: Stoppa all rörelse under smärta ---
-        // Vi kollar om Animatorn just nu spelar "ReactionHit" eller "Agonizing"
+        // Kolla om vi är upptagna med att ha ont
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        bool isBusy = state.IsName("ReactionHit") || state.IsName("Agonizing");
-
-        if (isBusy)
+        if (state.IsName("ReactionHit") || state.IsName("Agonizing"))
         {
-            agent.isStopped = true; // Stanna fötterna
-            anim.SetFloat("Speed", 0); // Säg till animatorn att vi står still
-            return; // Hoppa över resten av Update (ingen jagande!)
+            agent.isStopped = true;
+            return;
         }
-        // ---------------------------------------------------
 
         float distance = Vector3.Distance(transform.position, player.position);
 
@@ -54,8 +50,6 @@ public class EnemyAI : MonoBehaviour
         {
             Move(distance);
         }
-
-        if (Input.GetKeyDown(KeyCode.K)) TakeDamage(25);
     }
 
     void Move(float distance)
@@ -70,12 +64,26 @@ public class EnemyAI : MonoBehaviour
     {
         anim.ResetTrigger("Attack");
         anim.SetTrigger("Attack");
+        // Vänta 0.4 sekunder så näven hinner fram innan skadan sker
+        Invoke("DealDamage", 0.4f);
+    }
+
+    void DealDamage()
+    {
+        if (isDead) return;
+        float distance = Vector3.Distance(transform.position, player.position);
+        if (distance <= attackDistance + 0.5f)
+        {
+            PlayerHealth ph = player.GetComponent<PlayerHealth>();
+            if (ph != null) ph.TakeDamage(enemyDamage);
+        }
     }
 
     public void TakeDamage(int damage)
     {
         if (isDead) return;
         health -= damage;
+        Debug.Log("Zombien tog skada! HP: " + health);
 
         anim.SetTrigger("Hit");
 
@@ -90,6 +98,7 @@ public class EnemyAI : MonoBehaviour
 
     void Die()
     {
+        if (isDead) return;
         isDead = true;
         agent.isStopped = true;
         anim.SetTrigger("Die");

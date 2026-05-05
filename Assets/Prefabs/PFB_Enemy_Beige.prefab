@@ -179,10 +179,10 @@ MonoBehaviour:
   anim: {fileID: 4758771974425325613}
   health: 100
   walkSpeed: 1.5
-  runSpeed: 6
-  runDistance: 10
+  runSpeed: 6.5
+  runDistance: 5
   attackDistance: 1.2
-  attackRate: 1.5
+  attackRate: 1
 --- !u!95 &4758771974425325613 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
