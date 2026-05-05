@@ -1437,6 +1437,7 @@ MonoBehaviour:
   cameraTransform: {fileID: 1155258616}
   attackRange: 2.5
   attackCooldown: 1
+  damageAmount: 25
 --- !u!1001 &1979352518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1891,6 +1892,18 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 242322910}
+    - target: {fileID: 1059985646609555500, guid: 9b634f69f183df849921e9d2bf4db1f7, type: 3}
+      propertyPath: runSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059985646609555500, guid: 9b634f69f183df849921e9d2bf4db1f7, type: 3}
+      propertyPath: attackRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1059985646609555500, guid: 9b634f69f183df849921e9d2bf4db1f7, type: 3}
+      propertyPath: runDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4758771974415736781, guid: 9b634f69f183df849921e9d2bf4db1f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

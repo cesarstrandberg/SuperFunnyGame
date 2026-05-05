@@ -1,20 +1,20 @@
 using UnityEngine;
-using UnityEngine.InputSystem; // Necessary for the New Input System
+using UnityEngine.InputSystem;
 
 public class AxeSwing : MonoBehaviour
 {
     [Header("References")]
-    public Animator animator;      // Drag PlayerArmature here in the Inspector
-    public Transform cameraTransform; // Drag Main Camera here in the Inspector
+    public Animator animator;
+    public Transform cameraTransform;
 
     [Header("Settings")]
-    public float attackRange = 2.5f;   // How far the axe reaches
-    public float attackCooldown = 1.0f; // Time between swings
+    public float attackRange = 2.5f;
+    public float attackCooldown = 1.0f;
+    public int damageAmount = 25; // Hur mycket skada yxan gör
     private float nextAttackTime = 0f;
 
     void Update()
     {
-        // Check if Left Mouse is clicked (New Input System way) AND if enough time has passed
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame && Time.time >= nextAttackTime)
         {
             Swing();
@@ -24,33 +24,37 @@ public class AxeSwing : MonoBehaviour
 
     void Swing()
     {
-        // 1. Tell the Animator to play the "Swing" animation
         if (animator != null)
         {
+            // Reset gör att vi kan slå igen direkt utan att "fastna"
+            animator.ResetTrigger("Swing");
             animator.SetTrigger("Swing");
         }
 
-        // 2. Physics: Create an invisible "laser" (Raycast) from the camera
-        // If cameraTransform is not assigned, we use the Main Camera as a fallback
-        Vector3 origin = cameraTransform != null ? cameraTransform.position : Camera.main.transform.position;
-        Vector3 direction = cameraTransform != null ? cameraTransform.forward : Camera.main.transform.forward;
+        // 1. Hitta kamerans riktning
+        Transform cam = cameraTransform != null ? cameraTransform : Camera.main.transform;
+        Vector3 direction = cam.forward;
 
-        Ray ray = new Ray(origin, direction);
+        // 2. Starta strålen från SPELARENS bröst (inte kamerans position)
+        // transform.position är PlayerArmature. Vi lägger till 1.5m för att komma upp till bröstet.
+        Vector3 origin = transform.position + Vector3.up * 1.5f;
+
         RaycastHit hit;
 
-        // 3. Check if that laser hits something within range
-        if (Physics.Raycast(ray, out hit, attackRange))
+        // RITA LASERN - Nu bör den skjuta rakt framåt dit du tittar!
+        Debug.DrawRay(origin, direction * attackRange, Color.red, 1.0f);
+
+        if (Physics.Raycast(origin, direction, out hit, attackRange))
         {
-            Debug.Log("Hit: " + hit.collider.name);
+            Debug.Log("Träffade: " + hit.collider.name);
 
-            // This draws a red line in your Scene View (for debugging)
-            Debug.DrawLine(ray.origin, hit.point, Color.red, 1.0f);
-
-            // OPTIONAL: If the object has an "Enemy" tag, do something!
             if (hit.collider.CompareTag("Enemy"))
             {
-                Debug.Log("Killed a Suit-Zombie!");
-                // hit.collider.gameObject.SetActive(false); // Temporary "kill" logic
+                EnemyAI enemy = hit.collider.GetComponent<EnemyAI>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(damageAmount);
+                }
             }
         }
     }
