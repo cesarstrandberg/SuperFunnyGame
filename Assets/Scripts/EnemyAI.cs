@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     public float quoteDelay = 1.2f;
 
     [Header("Inställningar")]
-    public float health = 100f;
+    public float health = 75f;
     public float walkSpeed = 3.5f;
     public float runSpeed = 8.0f;
     public float runDistance = 2.5f;
@@ -95,7 +95,7 @@ public class EnemyAI : MonoBehaviour
         if (isDead) return;
         health -= damage;
         anim.SetTrigger("Hit");
-        if (health <= 25 && health > 0 && !hasAgonized)
+        if (health <= 26 && health > 0 && !hasAgonized)
         {
             hasAgonized = true;
             anim.SetTrigger("Agony");
