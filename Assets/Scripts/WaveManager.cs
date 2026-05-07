@@ -8,22 +8,18 @@ public class WaveManager : MonoBehaviour
 
     [Header("Referenser")]
     public GameObject zombiePrefab;
-    public GameObject whiskyPrefab; // Dra in din J&B-prefab här
+    public GameObject whiskyPrefab;
     public Transform doorSpawnPoint;
     public Transform kitchenSpawnPoint;
-    public Transform[] whiskySpawnPoints; // Skapa tomma objekt i rummet för där spriten ska stå
-    public TextMeshProUGUI waveText;
+    public Transform[] whiskySpawnPoints;
+    public TextMeshProUGUI currentWaveDisplayText; // Texten som syns i hörnet under spelets gång
 
     [Header("Timing")]
-    public float timeBetweenWaves = 12f;   // Ännu längre paus för andrum
-    public float delayBetweenSpawns = 8f;  // Längre paus mellan zombies
-
-    [Header("Audio")]
-    public AudioSource playerVoiceSource; // Dra in spelarens AudioSource (för citat)
-    public AudioClip waveClearQuote;      // Dra in citatet som ska spelas efter vågen
+    public float timeBetweenWaves = 12f;
+    public float delayBetweenSpawns = 8f;
 
     [Header("Status")]
-    public int currentWave = 0;
+    public int currentWave = 0; // Startar på 0
     private int zombiesToSpawn;
     private int zombiesAlive = 0;
     private bool isSpawning = false;
@@ -32,34 +28,31 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        // Starta första vågen
         StartCoroutine(NextWaveRoutine());
     }
 
     IEnumerator NextWaveRoutine()
     {
-        currentWave++;
+        currentWave++; // Här blir vågen 1, 2, 3 osv.
 
-        // MJUKARE START: 
-        // Våg 1: 1 st, Våg 2: 1 st, Våg 3: 2 st, Våg 4: 2 st, Våg 5: 3 st...
-        zombiesToSpawn = Mathf.CeilToInt(currentWave / 1.5f);
+        // Uppdatera texten i hörnet (valfritt)
+        if (currentWaveDisplayText != null) currentWaveDisplayText.text = "WAVE: " + currentWave;
 
-        if (waveText != null) waveText.text = "WAVE " + currentWave;
-
-        // --- RESPRAWNA WHISKY ---
         RespawnWhisky();
 
         yield return new WaitForSeconds(timeBetweenWaves);
 
+        // Beräkna hur många som ska spawnas för den aktuella vågen
+        zombiesToSpawn = Mathf.CeilToInt(currentWave / 1.5f);
         StartCoroutine(SpawnWave());
     }
 
     void RespawnWhisky()
     {
-        // Ta bort gamla flaskor om de finns kvar (valfritt)
-        GameObject[] oldWhisky = GameObject.FindGameObjectsWithTag("Whisky"); // Se till att din prefab har taggen "Whisky"
+        GameObject[] oldWhisky = GameObject.FindGameObjectsWithTag("Whisky");
         foreach (GameObject w in oldWhisky) Destroy(w);
 
-        // Skapa nya på alla platser
         foreach (Transform spot in whiskySpawnPoints)
         {
             if (whiskyPrefab != null) Instantiate(whiskyPrefab, spot.position, spot.rotation);
@@ -90,13 +83,13 @@ public class WaveManager : MonoBehaviour
 
         if (zombiesAlive <= 0 && !isSpawning)
         {
-            // VÅGEN ÄR SLUT: Spela citat
-            if (playerVoiceSource != null && waveClearQuote != null)
+            // NU visar vi kortet för den våg vi precis klarat av
+            if (BusinessCardUI.instance != null)
             {
-                playerVoiceSource.PlayOneShot(waveClearQuote);
+                BusinessCardUI.instance.ShowWaveComplete(currentWave);
             }
 
-            Debug.Log("Våg rensad! Patrick firar med en Scotch.");
+            // Vänta och starta sen rutinen för NÄSTA våg
             StartCoroutine(NextWaveRoutine());
         }
     }
