@@ -11,13 +11,12 @@ public class EnemyAI : MonoBehaviour
     [Header("Ljud")]
     public AudioClip attackSound;
     public AudioClip deathSound;
-    public AudioClip killQuoteClip;
 
     [Header("Stats")]
-    public float health = 75f; // 3 slag med 25 skada
+    public float health = 75f;
     public float attackDistance = 1.1f;
-    public float attackRate = 1.2f; // Lite snabbare för mer hardcore känsla
-    public float enemyDamage = 15f; // Lite mer skada för att öka pressen
+    public float attackRate = 1.2f;
+    public float enemyDamage = 15f;
 
     private bool isDead = false;
     private float nextAttackTime = 0f;
@@ -35,7 +34,6 @@ public class EnemyAI : MonoBehaviour
     {
         if (isDead) return;
 
-        // Om de precis blivit träffade, stanna till kort, sen fortsätt jaga
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
         if (state.IsName("ReactionHit"))
         {
@@ -61,9 +59,12 @@ public class EnemyAI : MonoBehaviour
     void MoveToPlayer()
     {
         if (isDead || agent.enabled == false) return;
-        agent.isStopped = false;
-        agent.SetDestination(player.position);
-        anim.SetFloat("Speed", agent.velocity.magnitude);
+        if (agent.isOnNavMesh)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+            anim.SetFloat("Speed", agent.velocity.magnitude);
+        }
     }
 
     void Attack()
@@ -83,22 +84,9 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isDead) return;
-
         health -= damage;
-
-        // Detta skriver ut i konsolen exakt hur mycket liv som är kvar
-        Debug.Log("Zombien tog skada! HP kvar: " + health);
-
-        if (health <= 0.1f)
-        {
-            Debug.Log("Zombien dog nu!");
-            Die();
-        }
-        else
-        {
-            // Vi kör BARA Hit om zombien faktiskt lever
-            anim.SetTrigger("Hit");
-        }
+        if (health <= 0.1f) Die();
+        else anim.SetTrigger("Hit");
     }
 
     void Die()
@@ -106,25 +94,13 @@ public class EnemyAI : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        // Rapportera till spawner
-        EnemySpawner spawner = FindObjectOfType<EnemySpawner>();
-        if (spawner != null) spawner.EnemyDied();
+        if (WaveManager.instance != null) WaveManager.instance.EnemyDied();
 
         agent.isStopped = true;
         agent.enabled = false;
-
         anim.SetTrigger("Die");
 
         if (deathSound && audioSource) audioSource.PlayOneShot(deathSound);
-
-        // Bateman-citat
-        PlayerHealth ph = player.GetComponent<PlayerHealth>();
-        if (ph != null && ph.voiceSource != null && killQuoteClip != null)
-        {
-            ph.voiceSource.PlayOneShot(killQuoteClip);
-        }
-
         if (GetComponent<Collider>()) GetComponent<Collider>().enabled = false;
-        if (KillCounter.instance != null) KillCounter.instance.AddKill();
     }
 }

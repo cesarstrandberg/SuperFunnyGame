@@ -9,8 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public Image healthBar;
 
     [Header("Audio")]
-    public AudioSource sfxSource;   // Dra in första AudioSourcen här
-    public AudioSource voiceSource; // Dra in andra AudioSourcen här
+    public AudioSource sfxSource;
+    public AudioSource voiceSource;
     public AudioClip[] hurtSounds;
     public AudioClip[] hurtQuotes;
     [Range(0, 1)] public float quoteChance = 0.5f;
@@ -18,24 +18,14 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        // Vi nollställer bara baren så den är full (1.0) i början
-        if (healthBar != null)
-        {
-            healthBar.fillAmount = 1f;
-        }
+        if (healthBar != null) healthBar.fillAmount = 1f;
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth -= damage;
+        if (healthBar != null) healthBar.fillAmount = currentHealth / maxHealth;
 
-        // Här räknar vi ut procenten: nuvarande hälsa delat på max hälsa
-        if (healthBar != null)
-        {
-            healthBar.fillAmount = currentHealth / maxHealth;
-        }
-
-        // Ljud-logiken (behålls som den var)
         if (hurtSounds.Length > 0 && sfxSource != null)
             sfxSource.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);
 
