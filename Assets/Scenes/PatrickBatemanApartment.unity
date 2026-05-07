@@ -861,7 +861,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Aaul Pallen''s killed: 0'
+  m_text: 'Paul Allen''s killed: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 834c53a8562310d4fbbfefab5b073123, type: 2}
   m_sharedMaterial: {fileID: -5505268246219199778, guid: 834c53a8562310d4fbbfefab5b073123, type: 2}
@@ -894,7 +894,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -1141,7 +1141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: maxZombies
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: timeBetweenSpawns

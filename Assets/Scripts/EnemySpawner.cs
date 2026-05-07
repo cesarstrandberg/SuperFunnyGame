@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject zombiePrefab;    // Dra in din Zombie-PFB här
-    public Transform[] spawnPoints;    // En lista med platser där de kan dyka upp
-    public float timeBetweenSpawns = 5f; // Hur ofta de spawnar
-    public int maxZombies = 10;        // Max antal zombies samtidigt i rummet
+    public GameObject zombiePrefab;
+    public Transform[] spawnPoints;
+    public float timeBetweenSpawns = 5f;
+    public int maxZombies = 3; // Ändra till 3 i Inspectorn
+    public int currentLivingEnemies = 0;
 
     private float timer;
 
@@ -15,10 +16,8 @@ public class EnemySpawner : MonoBehaviour
 
         if (timer >= timeBetweenSpawns)
         {
-            // Kolla hur många zombies som lever just nu
-            int currentZombies = GameObject.FindGameObjectsWithTag("Enemy").Length;
-
-            if (currentZombies < maxZombies)
+            // Vi kollar på vår egen räknare istället för att leta efter Tags
+            if (currentLivingEnemies < maxZombies)
             {
                 SpawnZombie();
             }
@@ -27,15 +26,24 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    public void EnemyDied()
+    {
+        currentLivingEnemies--;
+
+        // Säkerhetskoll så den aldrig blir minus
+        if (currentLivingEnemies < 0) currentLivingEnemies = 0;
+    }
+
     void SpawnZombie()
     {
         if (spawnPoints.Length == 0) return;
 
-        // Välj en slumpmässig plats från listan
         int randomIndex = Random.Range(0, spawnPoints.Length);
         Transform sp = spawnPoints[randomIndex];
 
-        // Skapa zombien
         Instantiate(zombiePrefab, sp.position, sp.rotation);
+
+        // VIKTIGT: Vi ökar räknaren här!
+        currentLivingEnemies++;
     }
 }

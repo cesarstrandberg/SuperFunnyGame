@@ -186,14 +186,9 @@ MonoBehaviour:
   anim: {fileID: 4758771974425325613}
   audioSource: {fileID: 466619080459961278}
   attackSound: {fileID: 8300000, guid: ddf6027f848f0a94ca25e23e2ababc59, type: 3}
-  agonySound: {fileID: 8300000, guid: cd0ce2d62eaa7a94c939f4de71916d0c, type: 3}
   deathSound: {fileID: 0}
   killQuoteClip: {fileID: 8300000, guid: 781b80bb5bc0b36499f14327bf46d4a3, type: 3}
-  quoteDelay: 1.9
-  health: 100
-  walkSpeed: 1.5
-  runSpeed: 6.5
-  runDistance: 5
+  health: 75
   attackDistance: 1.2
   attackRate: 1
   enemyDamage: 15
