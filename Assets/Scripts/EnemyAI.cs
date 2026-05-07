@@ -25,7 +25,7 @@ public class EnemyAI : MonoBehaviour
     public float runDistance = 2.5f;
     public float attackDistance = 1.1f;
     public float attackRate = 1.5f;
-    public float enemyDamage = 15f;
+    public float enemyDamage = 10f;
 
     private bool isDead = false;
     private bool hasAgonized = false;
