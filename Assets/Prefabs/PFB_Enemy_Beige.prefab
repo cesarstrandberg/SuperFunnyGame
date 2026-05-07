@@ -13,6 +13,10 @@ PrefabInstance:
       value: PFB_Enemy_Beige
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
@@ -22,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -3.83
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       propertyPath: m_LocalPosition.y
@@ -30,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       propertyPath: m_LocalRotation.w
@@ -183,7 +187,7 @@ MonoBehaviour:
   audioSource: {fileID: 466619080459961278}
   attackSound: {fileID: 8300000, guid: ddf6027f848f0a94ca25e23e2ababc59, type: 3}
   agonySound: {fileID: 8300000, guid: cd0ce2d62eaa7a94c939f4de71916d0c, type: 3}
-  deathSound: {fileID: 8300000, guid: af6b0aff8fa6ecd4bb35b05f16a02609, type: 3}
+  deathSound: {fileID: 0}
   killQuoteClip: {fileID: 8300000, guid: 781b80bb5bc0b36499f14327bf46d4a3, type: 3}
   quoteDelay: 1.9
   health: 100

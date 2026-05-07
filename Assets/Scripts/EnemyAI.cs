@@ -113,6 +113,7 @@ public class EnemyAI : MonoBehaviour
         if (deathSound && audioSource) audioSource.PlayOneShot(deathSound);
         Invoke("PlayBatemanKillQuote", quoteDelay);
         if (GetComponent<Collider>()) GetComponent<Collider>().enabled = false;
+        if (KillCounter.instance != null) KillCounter.instance.AddKill();
     }
 
     void PlayBatemanKillQuote()
