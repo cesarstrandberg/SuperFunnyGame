@@ -12,14 +12,14 @@ public class WaveManager : MonoBehaviour
     public Transform doorSpawnPoint;
     public Transform kitchenSpawnPoint;
     public Transform[] whiskySpawnPoints;
-    public TextMeshProUGUI currentWaveDisplayText; // Texten som syns i hörnet under spelets gång
+    public TextMeshProUGUI currentWaveDisplayText;
 
     [Header("Timing")]
     public float timeBetweenWaves = 12f;
     public float delayBetweenSpawns = 8f;
 
     [Header("Status")]
-    public int currentWave = 0; // Startar på 0
+    public int currentWave = 0;
     private int zombiesToSpawn;
     private int zombiesAlive = 0;
     private bool isSpawning = false;
@@ -28,22 +28,17 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
-        // Starta första vågen
         StartCoroutine(NextWaveRoutine());
     }
 
     IEnumerator NextWaveRoutine()
     {
-        currentWave++; // Här blir vågen 1, 2, 3 osv.
-
-        // Uppdatera texten i hörnet (valfritt)
+        currentWave++;
         if (currentWaveDisplayText != null) currentWaveDisplayText.text = "WAVE: " + currentWave;
 
         RespawnWhisky();
-
         yield return new WaitForSeconds(timeBetweenWaves);
 
-        // Beräkna hur många som ska spawnas för den aktuella vågen
         zombiesToSpawn = Mathf.CeilToInt(currentWave / 1.5f);
         StartCoroutine(SpawnWave());
     }
@@ -83,13 +78,12 @@ public class WaveManager : MonoBehaviour
 
         if (zombiesAlive <= 0 && !isSpawning)
         {
-            // NU visar vi kortet för den våg vi precis klarat av
-            if (BusinessCardUI.instance != null)
+            // FIXAD RAD: Nu ropar vi på den nya hanteraren
+            if (GameUIHandler.instance != null)
             {
-                BusinessCardUI.instance.ShowWaveComplete(currentWave);
+                GameUIHandler.instance.ShowWaveComplete(currentWave);
             }
 
-            // Vänta och starta sen rutinen för NÄSTA våg
             StartCoroutine(NextWaveRoutine());
         }
     }

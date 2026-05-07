@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -8,35 +7,61 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth;
     public Image healthBar;
 
+    [Header("Death Settings")]
+    public bool isDead = false;
+    public Image bloodyScreenOverlay; // Dra in din röda Panel här
+
+    [Header("Starter Assets (Dra in skripten här)")]
+    // Dessa rader är nu aktiva (ingen // framför)
+    public MonoBehaviour thirdPersonController;
+    public MonoBehaviour starterAssetsInputs;
+
     [Header("Audio")]
-    public AudioSource sfxSource;
     public AudioSource voiceSource;
-    public AudioClip[] hurtSounds;
-    public AudioClip[] hurtQuotes;
-    [Range(0, 1)] public float quoteChance = 0.5f;
+    public AudioClip deathQuoteLoop;
 
     void Start()
     {
         currentHealth = maxHealth;
-        if (healthBar != null) healthBar.fillAmount = 1f;
+        if (bloodyScreenOverlay) bloodyScreenOverlay.gameObject.SetActive(false);
     }
 
     public void TakeDamage(float damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         if (healthBar != null) healthBar.fillAmount = currentHealth / maxHealth;
-
-        if (hurtSounds.Length > 0 && sfxSource != null)
-            sfxSource.PlayOneShot(hurtSounds[Random.Range(0, hurtSounds.Length)]);
-
-        if (Random.value < quoteChance && hurtQuotes.Length > 0 && voiceSource != null)
-        {
-            if (!voiceSource.isPlaying)
-                voiceSource.PlayOneShot(hurtQuotes[Random.Range(0, hurtQuotes.Length)]);
-        }
 
         if (currentHealth <= 0) Die();
     }
 
-    void Die() { SceneManager.LoadScene(SceneManager.GetActiveScene().name); }
+    void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        // 1. Visa den röda skärmen
+        if (bloodyScreenOverlay) bloodyScreenOverlay.gameObject.SetActive(true);
+
+        // 2. Inaktivera styrning (Detta fryser både gubben och kameran!)
+        if (thirdPersonController != null) thirdPersonController.enabled = false;
+        if (starterAssetsInputs != null) starterAssetsInputs.enabled = false;
+
+        // 3. Spela det långa citatet på repeat
+        if (voiceSource != null && deathQuoteLoop != null)
+        {
+            voiceSource.ignoreListenerPause = true;
+            voiceSource.clip = deathQuoteLoop;
+            voiceSource.loop = true;
+            voiceSource.Play();
+        }
+
+        // 4. Visa Visitkortet
+        if (GameUIHandler.instance != null)
+        {
+            int score = WaveManager.instance.currentWave - 1;
+            GameUIHandler.instance.ShowGameOver(score);
+        }
+    }
 }

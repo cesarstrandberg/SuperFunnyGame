@@ -7,8 +7,6 @@ public class EnemyAI : MonoBehaviour
     public Transform player;
     public Animator anim;
     public AudioSource audioSource;
-
-    [Header("Ljud")]
     public AudioClip attackSound;
     public AudioClip deathSound;
 
@@ -20,6 +18,7 @@ public class EnemyAI : MonoBehaviour
 
     private bool isDead = false;
     private float nextAttackTime = 0f;
+    private PlayerHealth playerHealth; // NY: Referens till spelarens hälsa
 
     void Start()
     {
@@ -28,43 +27,43 @@ public class EnemyAI : MonoBehaviour
             GameObject p = GameObject.FindWithTag("Player");
             if (p != null) player = p.transform;
         }
+
+        // Hämta hälso-skriptet från spelaren
+        if (player != null) playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     void Update()
     {
         if (isDead) return;
 
-        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        if (state.IsName("ReactionHit"))
+        // NYTT: Om spelaren är död, sluta jaga och attackera!
+        if (playerHealth != null && playerHealth.isDead)
         {
             agent.isStopped = true;
-            return;
+            agent.enabled = false; // Stäng av NavMeshAgent helt
+            anim.SetFloat("Speed", 0); // Gå till Idle
+            return; // Avbryt resten av logiken
         }
 
-        float distance = Vector3.Distance(transform.position, player.position);
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+        if (state.IsName("ReactionHit")) { agent.isStopped = true; return; }
 
+        float distance = Vector3.Distance(transform.position, player.position);
         if (distance <= attackDistance)
         {
             agent.isStopped = true;
             anim.SetFloat("Speed", 0);
-            if (Time.time >= nextAttackTime)
-            {
-                Attack();
-                nextAttackTime = Time.time + attackRate;
-            }
+            if (Time.time >= nextAttackTime) { Attack(); nextAttackTime = Time.time + attackRate; }
         }
         else { MoveToPlayer(); }
     }
 
     void MoveToPlayer()
     {
-        if (isDead || agent.enabled == false) return;
-        if (agent.isOnNavMesh)
-        {
-            agent.isStopped = false;
-            agent.SetDestination(player.position);
-            anim.SetFloat("Speed", agent.velocity.magnitude);
-        }
+        if (isDead || !agent.isOnNavMesh) return;
+        agent.isStopped = false;
+        agent.SetDestination(player.position);
+        anim.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     void Attack()
@@ -77,8 +76,8 @@ public class EnemyAI : MonoBehaviour
     void DealDamage()
     {
         if (isDead) return;
-        PlayerHealth ph = player.GetComponent<PlayerHealth>();
-        if (ph != null) ph.TakeDamage(enemyDamage);
+        // Vi TakeDamage sköter kollen internt om vi kan ta skada
+        if (playerHealth != null) playerHealth.TakeDamage(enemyDamage);
     }
 
     public void TakeDamage(int damage)
@@ -93,13 +92,10 @@ public class EnemyAI : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
-
         if (WaveManager.instance != null) WaveManager.instance.EnemyDied();
-
         agent.isStopped = true;
         agent.enabled = false;
         anim.SetTrigger("Die");
-
         if (deathSound && audioSource) audioSource.PlayOneShot(deathSound);
         if (GetComponent<Collider>()) GetComponent<Collider>().enabled = false;
     }
