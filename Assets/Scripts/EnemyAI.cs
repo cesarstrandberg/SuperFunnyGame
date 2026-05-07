@@ -7,7 +7,7 @@ public class EnemyAI : MonoBehaviour
     public NavMeshAgent agent;
     public Transform player;
     public Animator anim;
-    public AudioSource audioSource; // Zombiens egen högtalare
+    public AudioSource audioSource;
 
     [Header("Zombie Sounds")]
     public AudioClip attackSound;
@@ -19,7 +19,7 @@ public class EnemyAI : MonoBehaviour
     public float quoteDelay = 1.2f;
 
     [Header("Inställningar")]
-    public float health = 75f;
+    public float health = 75f; // 3 slag om yxan gör 25
     public float walkSpeed = 3.5f;
     public float runSpeed = 8.0f;
     public float runDistance = 2.5f;
@@ -43,13 +43,18 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         if (isDead) return;
+
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+
+        // Om zombien reagerar på träff eller skriker, stå still
         if (state.IsName("ReactionHit") || state.IsName("Agonizing"))
         {
             agent.isStopped = true;
             return;
         }
+
         float distance = Vector3.Distance(transform.position, player.position);
+
         if (distance <= attackDistance)
         {
             agent.isStopped = true;
@@ -60,11 +65,16 @@ public class EnemyAI : MonoBehaviour
                 nextAttackTime = Time.time + attackRate;
             }
         }
-        else { Move(distance); }
+        else
+        {
+            Move(distance);
+        }
     }
 
     void Move(float distance)
     {
+        if (isDead) return;
+
         agent.isStopped = false;
         agent.speed = (distance > runDistance) ? runSpeed : walkSpeed;
         agent.SetDestination(player.position);
@@ -93,33 +103,59 @@ public class EnemyAI : MonoBehaviour
     public void TakeDamage(int damage)
     {
         if (isDead) return;
+
         health -= damage;
+
+        // Vi resettar triggers för att vara säkra på att rätt animation prioriteras
+        anim.ResetTrigger("Hit");
         anim.SetTrigger("Hit");
-        if (health <= 26 && health > 0 && !hasAgonized)
+
+        // AGONY: Sker efter slag 2 (75 - 25 - 25 = 25 HP kvar)
+        // Vi kollar om HP är mellan 1 och 26
+        if (health > 0 && health <= 26 && !hasAgonized)
         {
             hasAgonized = true;
             anim.SetTrigger("Agony");
             if (agonySound && audioSource) audioSource.PlayOneShot(agonySound);
         }
-        if (health <= 0) Die();
+
+        // DIE: Sker när HP når 0 eller mindre
+        if (health <= 0)
+        {
+            Die();
+        }
     }
 
     void Die()
     {
         if (isDead) return;
         isDead = true;
+
+        // 1. Stäng av AI helt så den inte flyttar liket
         agent.isStopped = true;
+        agent.enabled = false;
+
+        // 2. Kör animationen
+        anim.ResetTrigger("Hit");
+        anim.ResetTrigger("Agony");
         anim.SetTrigger("Die");
+
+        // 3. Ljud
         if (deathSound && audioSource) audioSource.PlayOneShot(deathSound);
         Invoke("PlayBatemanKillQuote", quoteDelay);
+
+        // 4. Stäng av kollision så spelaren kan gå genom liket
         if (GetComponent<Collider>()) GetComponent<Collider>().enabled = false;
+
+        // 5. Uppdatera räknaren
         if (KillCounter.instance != null) KillCounter.instance.AddKill();
+
+        // Vi kör INTE Destroy(gameObject) för vi vill ha kvar liket!
     }
 
     void PlayBatemanKillQuote()
     {
         PlayerHealth ph = player.GetComponent<PlayerHealth>();
-        // FIX: Här stod det audioSource förut, nu står det voiceSource!
         if (ph != null && ph.voiceSource != null && killQuoteClip != null)
         {
             ph.voiceSource.PlayOneShot(killQuoteClip);
