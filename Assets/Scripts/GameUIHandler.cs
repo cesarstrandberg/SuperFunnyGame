@@ -1,56 +1,53 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections;
+using TMPro;
 
 public class GameUIHandler : MonoBehaviour
 {
     public static GameUIHandler instance;
 
-    [Header("Visitkort (Panels)")]
+    [Header("UI Paneler")]
     public GameObject waveCard;
     public GameObject deathCard;
 
-    [Header("Texter")]
-    public TextMeshProUGUI waveStatusText;
-    public TextMeshProUGUI finalWavesText;
+    [Header("UI Texter")]
+    public TextMeshProUGUI waveCompletedText;
 
-    void Awake()
-    {
-        instance = this;
-        Time.timeScale = 1f; // Säkerställ att tiden går när vi startar
-    }
+    void Awake() { instance = this; }
 
-    public void ShowWaveComplete(int waveNumber)
+    public void ShowWaveComplete(int waveNum)
     {
-        if (waveStatusText != null) waveStatusText.text = "WAVE " + waveNumber + " COMPLETED";
-        StopAllCoroutines();
-        StartCoroutine(WaveCardRoutine());
+        if (waveCard != null)
+        {
+            if (waveCompletedText != null)
+            {
+                // HÄR FIXAR VI TEXTEN: Vi skriver hela meningen i koden
+                // Detta gör att "COMPLETED" aldrig försvinner!
+                waveCompletedText.text = "WAVE " + waveNum + " COMPLETED";
+            }
+            StopAllCoroutines();
+            StartCoroutine(WaveCardRoutine());
+        }
     }
 
     IEnumerator WaveCardRoutine()
     {
-        if (waveCard) waveCard.SetActive(true);
-        yield return new WaitForSeconds(4f);
-        if (waveCard) waveCard.SetActive(false);
+        waveCard.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        waveCard.SetActive(false);
     }
 
-    public void ShowGameOver(int waves)
+    public void ShowGameOver(int finalScore)
     {
         if (deathCard != null) deathCard.SetActive(true);
-        if (finalWavesText != null) finalWavesText.text = "TOTAL WAVES CLEARED: " + waves;
-
-        // VIKTIGT: Släpp musen fri
+        Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-
-        Time.timeScale = 0f; // Frys spelet
     }
 
     public void PlayAgain()
     {
-        Debug.Log("Retry tryckt! Startar om...");
-        Time.timeScale = 1f; // MÅSTE återställas innan load
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 }

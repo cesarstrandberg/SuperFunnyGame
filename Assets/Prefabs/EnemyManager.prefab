@@ -45,7 +45,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
   zombiePrefab: {fileID: 4758771974415959021, guid: 9b634f69f183df849921e9d2bf4db1f7, type: 3}
-  spawnPoints:
+  whiskyPrefab: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
+  doorSpawnPoint: {fileID: 0}
+  kitchenSpawnPoint: {fileID: 0}
+  whiskySpawnPoints:
   - {fileID: 0}
-  timeBetweenSpawns: 15
-  maxZombies: 10
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentWaveDisplayText: {fileID: 0}
+  spawningEnabled: 1
+  yOffset: 0.05
+  timeBetweenWaves: 12
+  delayBetweenSpawns: 8
+  currentWave: 0

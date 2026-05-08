@@ -543,7 +543,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: WAVE 0 COMPLETED
+  m_text: WAVE X COMPLETED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 834c53a8562310d4fbbfefab5b073123, type: 2}
   m_sharedMaterial: {fileID: -5505268246219199778, guid: 834c53a8562310d4fbbfefab5b073123, type: 2}
@@ -640,7 +640,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -20}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 260, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &288071393
 GameObject:
@@ -1009,7 +1009,7 @@ Transform:
   m_GameObject: {fileID: 771745210}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.49246, y: 0, z: -3.1305099}
+  m_LocalPosition: {x: 8.49246, y: 0, z: 0.86949015}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2271,7 +2271,7 @@ Transform:
   m_GameObject: {fileID: 1127063247}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.42167488, y: 0.3, z: 0.53882563}
+  m_LocalPosition: {x: -0.42167488, y: 0.4, z: 0.53882563}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2604,8 +2604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BusinessCardUI
   waveCard: {fileID: 841068136}
   deathCard: {fileID: 1885919678}
-  waveStatusText: {fileID: 276825379}
-  finalWavesText: {fileID: 2139503245}
+  waveCompletedText: {fileID: 276825379}
 --- !u!114 &1292791428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,49 +3185,25 @@ PrefabInstance:
       value: WaveManager
       objectReference: {fileID: 0}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: maxZombies
-      value: 3
+      propertyPath: currentWave
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: whiskyPrefab
-      value: 
-      objectReference: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: doorSpawnPoint
       value: 
       objectReference: {fileID: 464261718}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: waveClearQuote
-      value: 
-      objectReference: {fileID: 8300000, guid: 781b80bb5bc0b36499f14327bf46d4a3, type: 3}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: spawningEnabled
-      value: 0
+      propertyPath: timeBetweenWaves
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: kitchenSpawnPoint
       value: 
       objectReference: {fileID: 771745211}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: playerVoiceSource
+      propertyPath: currentWaveDisplayText
       value: 
-      objectReference: {fileID: 1828221348}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: timeBetweenSpawns
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: 'spawnPoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: whiskySpawnPoints.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: 'whiskySpawnPoints.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 276825379}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: 'whiskySpawnPoints.Array.data[1]'
       value: 
@@ -3241,10 +3216,6 @@ PrefabInstance:
       propertyPath: 'whiskySpawnPoints.Array.data[3]'
       value: 
       objectReference: {fileID: 1726676161}
-    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
-      propertyPath: 'whiskySpawnPoints.Array.data[4]'
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3827,11 +3798,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &1828221348 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 6135120555595015134, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}
-  m_PrefabInstance: {fileID: 794635079}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1828221352 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8053070782655000553, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}

@@ -101,6 +101,13 @@ public class EnemyAI : MonoBehaviour
     {
         if (isDead) return;
         isDead = true;
+
+        // Denna rad säger till räknaren att lägga till ett poäng:
+        if (KillCounter.instance != null)
+        {
+            KillCounter.instance.AddKill();
+        }
+
         if (WaveManager.instance != null) WaveManager.instance.EnemyDied();
         agent.isStopped = true;
         agent.enabled = false;
