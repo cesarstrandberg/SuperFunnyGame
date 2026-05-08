@@ -30,7 +30,7 @@ public class KillCounter : MonoBehaviour
         if (killText != null)
         {
             // Här är din episka text!
-            killText.text = "Aaul Pallen's killed: " + count;
+            killText.text = "Paul Allen's killed: " + count;
         }
     }
 }

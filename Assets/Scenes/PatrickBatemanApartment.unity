@@ -119,63 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &11360291
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_Name
-      value: Whisky (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.5307102
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.6054466
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.0592468
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
 --- !u!1 &17965812
 GameObject:
   m_ObjectHideFlags: 0
@@ -313,152 +256,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 17965812}
   m_CullTransparentMesh: 1
---- !u!1001 &88691195
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_Name
-      value: Whisky (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.88175195
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.31349984
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.6767324
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
---- !u!1001 &94561201
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_Name
-      value: Whisky (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.24365285
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.99815035
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.8206913
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
---- !u!1 &101288683
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 101288684}
-  m_Layer: 0
-  m_Name: Whisky
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &101288684
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 101288683}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.46935, y: 1.29577, z: -1.69494}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1405718721}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &186726325
 GameObject:
   m_ObjectHideFlags: 0
@@ -982,63 +779,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 288071393}
   m_CullTransparentMesh: 1
---- !u!1001 &302025964
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 101288684}
-    m_Modifications:
-    - target: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_Name
-      value: Whisky (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.15875816
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.8389677
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
 --- !u!1 &344891292 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ea2fadeaebc1c04479e9dc232e62a0ca, type: 3}
@@ -1076,11 +816,6 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 0d0a8b0102f0af84198daca611c23408, type: 2}
   m_BuildHeightMesh: 0
---- !u!4 &418062364 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-  m_PrefabInstance: {fileID: 11360291}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &464261717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,11 +984,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554177338}
   m_CullTransparentMesh: 1
---- !u!4 &671238583 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-  m_PrefabInstance: {fileID: 1217321125}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &771745210
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,63 +2215,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1062609378}
   m_CullTransparentMesh: 1
---- !u!1001 &1217321125
-PrefabInstance:
+--- !u!1 &1089109959
+GameObject:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1089109960}
+  m_Layer: 0
+  m_Name: KitchenBar (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1089109960
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089109959}
   serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7193370678934368769, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_Name
-      value: Whisky (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.32291904
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.31349984
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.3885915
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.466293, y: 1.3, z: -1.46}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1127063247
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1127063248}
+  m_Layer: 0
+  m_Name: TableNearWindow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1127063248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127063247}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.42167488, y: 0.3, z: 0.53882563}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1235704310
 GameObject:
   m_ObjectHideFlags: 0
@@ -2593,7 +2328,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.6226415, g: 0, b: 0, a: 0.5803922}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -2870,7 +2605,7 @@ MonoBehaviour:
   waveCard: {fileID: 841068136}
   deathCard: {fileID: 1885919678}
   waveStatusText: {fileID: 276825379}
-  finalWavesText: {fileID: 0}
+  finalWavesText: {fileID: 2139503245}
 --- !u!114 &1292791428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2956,6 +2691,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1333155236
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333155237}
+  m_Layer: 0
+  m_Name: TableNearKitchen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1333155237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333155236}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.0724076, y: 0.6, z: -0.9178708}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1344392759
 GameObject:
   m_ObjectHideFlags: 0
@@ -3093,11 +2859,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344392759}
   m_CullTransparentMesh: 1
---- !u!4 &1405718721 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-  m_PrefabInstance: {fileID: 302025964}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1426819271
 GameObject:
   m_ObjectHideFlags: 0
@@ -3372,11 +3133,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537138140}
   m_CullTransparentMesh: 1
---- !u!4 &1560920546 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-  m_PrefabInstance: {fileID: 94561201}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1626576839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3446,6 +3202,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 781b80bb5bc0b36499f14327bf46d4a3, type: 3}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
+      propertyPath: spawningEnabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: kitchenSpawnPoint
       value: 
       objectReference: {fileID: 771745211}
@@ -3468,23 +3228,23 @@ PrefabInstance:
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: 'whiskySpawnPoints.Array.data[0]'
       value: 
-      objectReference: {fileID: 418062364}
+      objectReference: {fileID: 0}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: 'whiskySpawnPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 671238583}
+      objectReference: {fileID: 1127063248}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: 'whiskySpawnPoints.Array.data[2]'
       value: 
-      objectReference: {fileID: 1707919680}
+      objectReference: {fileID: 1333155237}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: 'whiskySpawnPoints.Array.data[3]'
       value: 
-      objectReference: {fileID: 1560920546}
+      objectReference: {fileID: 1726676161}
     - target: {fileID: 8648691467434224173, guid: 695a3e681673aa148ad4f32c979331c5, type: 3}
       propertyPath: 'whiskySpawnPoints.Array.data[4]'
       value: 
-      objectReference: {fileID: 1405718721}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3857,11 +3617,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699097454}
   m_CullTransparentMesh: 1
---- !u!4 &1707919680 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7536822533914863803, guid: d23485388fac1064e80e3c2d6f9d038a, type: 3}
-  m_PrefabInstance: {fileID: 88691195}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1714575524
 GameObject:
   m_ObjectHideFlags: 0
@@ -3995,6 +3750,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1714575524}
   m_CullTransparentMesh: 1
+--- !u!1 &1726676160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1726676161}
+  m_Layer: 0
+  m_Name: KitchenBar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1726676161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1726676160}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.466293, y: 1.3, z: -2.5701623}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1755628615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5809,9 +5595,8 @@ SceneRoots:
   - {fileID: 838418230}
   - {fileID: 464261718}
   - {fileID: 771745211}
-  - {fileID: 101288684}
-  - {fileID: 11360291}
-  - {fileID: 1217321125}
-  - {fileID: 88691195}
-  - {fileID: 94561201}
   - {fileID: 1292791431}
+  - {fileID: 1333155237}
+  - {fileID: 1127063248}
+  - {fileID: 1726676161}
+  - {fileID: 1089109960}

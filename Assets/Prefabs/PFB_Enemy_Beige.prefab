@@ -187,11 +187,10 @@ MonoBehaviour:
   audioSource: {fileID: 466619080459961278}
   attackSound: {fileID: 8300000, guid: ddf6027f848f0a94ca25e23e2ababc59, type: 3}
   deathSound: {fileID: 0}
-  killQuoteClip: {fileID: 8300000, guid: 781b80bb5bc0b36499f14327bf46d4a3, type: 3}
   health: 75
-  attackDistance: 1.2
+  attackDistance: 1
   attackRate: 1
-  enemyDamage: 15
+  enemyDamage: 10
 --- !u!82 &466619080459961278
 AudioSource:
   m_ObjectHideFlags: 0

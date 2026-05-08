@@ -18,40 +18,39 @@ public class GameUIHandler : MonoBehaviour
     void Awake()
     {
         instance = this;
-        if (waveCard) waveCard.SetActive(false);
-        if (deathCard) deathCard.SetActive(false);
+        Time.timeScale = 1f; // Säkerställ att tiden går när vi startar
     }
 
     public void ShowWaveComplete(int waveNumber)
     {
-        waveStatusText.text = "WAVE " + waveNumber + " COMPLETED";
+        if (waveStatusText != null) waveStatusText.text = "WAVE " + waveNumber + " COMPLETED";
         StopAllCoroutines();
         StartCoroutine(WaveCardRoutine());
     }
 
     IEnumerator WaveCardRoutine()
     {
-        waveCard.SetActive(true);
+        if (waveCard) waveCard.SetActive(true);
         yield return new WaitForSeconds(4f);
-        waveCard.SetActive(false);
+        if (waveCard) waveCard.SetActive(false);
     }
 
     public void ShowGameOver(int waves)
     {
-        deathCard.SetActive(true);
-        finalWavesText.text = "TOTAL WAVES CLEARED: " + waves;
+        if (deathCard != null) deathCard.SetActive(true);
+        if (finalWavesText != null) finalWavesText.text = "TOTAL WAVES CLEARED: " + waves;
 
+        // VIKTIGT: Släpp musen fri
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        // Fryser spelet så man kan titta på sitt visitkort
-        Time.timeScale = 0f;
+        Time.timeScale = 0f; // Frys spelet
     }
 
-    // Denna funktion kopplar du till din RETRY-knapp i Unity
     public void PlayAgain()
     {
-        Time.timeScale = 1f; // Viktigt: Starta tiden igen!
+        Debug.Log("Retry tryckt! Startar om...");
+        Time.timeScale = 1f; // MÅSTE återställas innan load
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

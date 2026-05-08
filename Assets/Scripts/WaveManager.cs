@@ -14,6 +14,12 @@ public class WaveManager : MonoBehaviour
     public Transform[] whiskySpawnPoints;
     public TextMeshProUGUI currentWaveDisplayText;
 
+    [Header("Debug")]
+    public bool spawningEnabled = true;
+
+    [Header("Whisky Inställningar")]
+    public float yOffset = 0.05f;
+
     [Header("Timing")]
     public float timeBetweenWaves = 12f;
     public float delayBetweenSpawns = 8f;
@@ -26,10 +32,7 @@ public class WaveManager : MonoBehaviour
 
     void Awake() { instance = this; }
 
-    void Start()
-    {
-        StartCoroutine(NextWaveRoutine());
-    }
+    void Start() { StartCoroutine(NextWaveRoutine()); }
 
     IEnumerator NextWaveRoutine()
     {
@@ -43,14 +46,29 @@ public class WaveManager : MonoBehaviour
         StartCoroutine(SpawnWave());
     }
 
+     // Justera denna i Inspectorn (t.ex. 0.02 för att sänka mer)
+
     void RespawnWhisky()
     {
-        GameObject[] oldWhisky = GameObject.FindGameObjectsWithTag("Whisky");
-        foreach (GameObject w in oldWhisky) Destroy(w);
+        GameObject[] oldWhiskies = GameObject.FindGameObjectsWithTag("Whisky");
+        foreach (GameObject w in oldWhiskies) { if (w != null) Destroy(w); }
 
         foreach (Transform spot in whiskySpawnPoints)
         {
-            if (whiskyPrefab != null) Instantiate(whiskyPrefab, spot.position, spot.rotation);
+            if (spot != null && whiskyPrefab != null)
+            {
+                Vector3 spawnPos = spot.position;
+
+                // RAYCAST: Skjut en osynlig stråle neråt för att hitta bordet
+                RaycastHit hit;
+                if (Physics.Raycast(spot.position, Vector3.down, out hit, 2f))
+                {
+                    // Om vi träffar något (bordet), sätt positionen precis på ytan + din lilla offset
+                    spawnPos = hit.point + Vector3.up * yOffset;
+                }
+
+                Instantiate(whiskyPrefab, spawnPos, spot.rotation);
+            }
         }
     }
 
@@ -59,31 +77,36 @@ public class WaveManager : MonoBehaviour
         isSpawning = true;
         for (int i = 0; i < zombiesToSpawn; i++)
         {
-            SpawnZombie();
-            yield return new WaitForSeconds(delayBetweenSpawns);
+            // Kollar om vi får spawna just nu
+            if (spawningEnabled)
+            {
+                SpawnZombie();
+                yield return new WaitForSeconds(delayBetweenSpawns);
+            }
+            else
+            {
+                // Om vi stängt av, vänta en sekund och kolla igen
+                i--;
+                yield return new WaitForSeconds(1f);
+            }
         }
         isSpawning = false;
     }
+    
 
     void SpawnZombie()
     {
         Transform selectedPoint = (Random.value < 0.8f) ? doorSpawnPoint : kitchenSpawnPoint;
-        Instantiate(zombiePrefab, selectedPoint.position, selectedPoint.rotation);
+        if (selectedPoint != null) Instantiate(zombiePrefab, selectedPoint.position, selectedPoint.rotation);
         zombiesAlive++;
     }
 
     public void EnemyDied()
     {
         zombiesAlive--;
-
         if (zombiesAlive <= 0 && !isSpawning)
         {
-            // FIXAD RAD: Nu ropar vi på den nya hanteraren
-            if (GameUIHandler.instance != null)
-            {
-                GameUIHandler.instance.ShowWaveComplete(currentWave);
-            }
-
+            if (GameUIHandler.instance != null) GameUIHandler.instance.ShowWaveComplete(currentWave);
             StartCoroutine(NextWaveRoutine());
         }
     }

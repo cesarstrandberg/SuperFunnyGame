@@ -29,7 +29,7 @@ public class HealthPickup : MonoBehaviour
                 Animator playerAnim = other.GetComponentInChildren<Animator>();
                 if (playerAnim != null)
                 {
-                    playerAnim.SetTrigger("Drink");
+                    //playerAnim.SetTrigger("Drink");
                 }
 
                 // 4. Spela ljudet av klirrande is/glas

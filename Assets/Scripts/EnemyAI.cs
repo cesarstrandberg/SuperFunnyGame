@@ -34,28 +34,37 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (isDead) return;
-
-        // NYTT: Om spelaren är död, sluta jaga och attackera!
-        if (playerHealth != null && playerHealth.isDead)
+        // 1. Kolla om fienden är död ELLER om spelaren är död
+        if (isDead || (playerHealth != null && playerHealth.isDead))
         {
-            agent.isStopped = true;
-            agent.enabled = false; // Stäng av NavMeshAgent helt
-            anim.SetFloat("Speed", 0); // Gå till Idle
-            return; // Avbryt resten av logiken
+            // Stoppa bara om vi faktiskt är på banan (NavMesh)
+            if (agent.enabled && agent.isOnNavMesh) agent.isStopped = true;
+
+            // Se till att zombien slutar spela sin spring-animation
+            anim.SetFloat("Speed", 0);
+            return;
         }
 
-        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
-        if (state.IsName("ReactionHit")) { agent.isStopped = true; return; }
-
+        // 2. Beräkna avstånd till Patrick
         float distance = Vector3.Distance(transform.position, player.position);
+
+        // 3. Attack-logik
         if (distance <= attackDistance)
         {
-            agent.isStopped = true;
+            if (agent.enabled && agent.isOnNavMesh) agent.isStopped = true;
             anim.SetFloat("Speed", 0);
-            if (Time.time >= nextAttackTime) { Attack(); nextAttackTime = Time.time + attackRate; }
+
+            if (Time.time >= nextAttackTime)
+            {
+                Attack();
+                nextAttackTime = Time.time + attackRate;
+            }
         }
-        else { MoveToPlayer(); }
+        // 4. Jaga-logik
+        else
+        {
+            MoveToPlayer();
+        }
     }
 
     void MoveToPlayer()
