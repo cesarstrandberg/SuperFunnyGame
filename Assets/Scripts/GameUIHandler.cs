@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameUIHandler : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class GameUIHandler : MonoBehaviour
     [Header("UI Texter")]
     public TextMeshProUGUI waveCompletedText;
 
+    //// NYA RADER HÄR ////
+    public AudioSource playerVoiceSource;
+    public AudioClip waveCompleteQuote;
+    //////////////////////
+
     void Awake() { instance = this; }
 
     public void ShowWaveComplete(int waveNum)
@@ -21,10 +27,13 @@ public class GameUIHandler : MonoBehaviour
         {
             if (waveCompletedText != null)
             {
-                // HÄR FIXAR VI TEXTEN: Vi skriver hela meningen i koden
-                // Detta gör att "COMPLETED" aldrig försvinner!
                 waveCompletedText.text = "WAVE " + waveNum + " COMPLETED";
             }
+
+            //// NY RAD HÄR ////
+            if (playerVoiceSource != null && waveCompleteQuote != null) playerVoiceSource.PlayOneShot(waveCompleteQuote);
+            ////////////////////
+
             StopAllCoroutines();
             StartCoroutine(WaveCardRoutine());
         }
@@ -48,6 +57,12 @@ public class GameUIHandler : MonoBehaviour
     public void PlayAgain()
     {
         Time.timeScale = 1f;
-        UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void ExitToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1f;
     }
 }

@@ -1072,6 +1072,10 @@ PrefabInstance:
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1863895705039441901, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}
+      propertyPath: hitQuote
+      value: 
+      objectReference: {fileID: 8300000, guid: f1198396362a337498141b99d9b0735e, type: 3}
+    - target: {fileID: 1863895705039441901, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 1261601219}
@@ -1151,11 +1155,20 @@ PrefabInstance:
       propertyPath: attackRange
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 7561841364264051064, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}
+      propertyPath: quoteChance
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}
+--- !u!82 &794635080 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6135120555595015134, guid: eede499b51ee46a4cb7477ab38743af9, type: 3}
+  m_PrefabInstance: {fileID: 794635079}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &838418228
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1201,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.15
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2478,7 +2491,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1249961488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1292791427}
+        m_TargetAssemblyTypeName: GameUIHandler, Assembly-CSharp
+        m_MethodName: ExitToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1249961488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2576,6 +2601,8 @@ MonoBehaviour:
   starterAssetsInputs: {fileID: 0}
   voiceSource: {fileID: 0}
   deathQuoteLoop: {fileID: 0}
+  hitQuote: {fileID: 0}
+  hitQuoteChance: 0.2
 --- !u!114 &1261601219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2649,6 +2676,8 @@ MonoBehaviour:
   waveCard: {fileID: 841068136}
   deathCard: {fileID: 1885919678}
   waveCompletedText: {fileID: 276825379}
+  playerVoiceSource: {fileID: 794635080}
+  waveCompleteQuote: {fileID: 8300000, guid: 781b80bb5bc0b36499f14327bf46d4a3, type: 3}
 --- !u!114 &1292791428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3561,8 +3590,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4279900698
-  m_fontColor: {r: 0.101960786, g: 0.101960786, b: 0.101960786, a: 1}
+    rgba: 4278190335
+  m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3579,8 +3608,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
