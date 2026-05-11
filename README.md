@@ -9,3 +9,18 @@ This project uses the following third-party assets:
   Cinzel à € by Ndiscover from dafont https://www.dafont.com/cinzel.font 
 
   "Music by wbmstudio - 80s Always With Me (Retrowave & Synth Pop) from Pixabay"
+
+   whisky: Whisky https://sketchfab.com/3d-models/whisky-32f15b0f62eb4deb8e5ba7d1c960f86a made by: Jiaxing
+
+   Paul Allen: Suit Character Pack - Generic https://assetstore.unity.com/packages/3d/characters/humanoids/suit-character-pack-generic-16772 made by: BlocBros Studio
+
+   axe: Beginner Axe https://assetstore.unity.com/packages/3d/props/weapons/beginner-axe-305278 made by santutu
+
+  
+
+    main character: by LasquetiSpice, from sketchfab
+    
+    animations: provided by mixamo (adobe)
+Voice lines from Movie-Sounds. 
+
+music from PixaBay
