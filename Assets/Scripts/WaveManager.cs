@@ -9,8 +9,10 @@ public class WaveManager : MonoBehaviour
     [Header("Referenser")]
     public GameObject zombiePrefab;
     public GameObject whiskyPrefab;
-    public Transform doorSpawnPoint;
-    public Transform kitchenSpawnPoint;
+
+    // Nu använder vi en lista för alla dina hörn/platser
+    public Transform[] zombieSpawnPoints;
+
     public Transform[] whiskySpawnPoints;
     public TextMeshProUGUI currentWaveDisplayText;
 
@@ -42,7 +44,10 @@ public class WaveManager : MonoBehaviour
     IEnumerator SpawnWaveRoutine()
     {
         RespawnWhisky();
-        yield return new WaitForSeconds(timeBetweenWaves);
+
+        // Fix för Wave 1: Vänta 4 sekunder extra bara i början
+        float initialDelay = (currentWave == 1) ? 4f : 0f;
+        yield return new WaitForSeconds(timeBetweenWaves + initialDelay);
 
         zombiesToSpawn = Mathf.CeilToInt(currentWave / 1.1f);
         if (zombiesToSpawn < 1) zombiesToSpawn = 1;
@@ -62,11 +67,17 @@ public class WaveManager : MonoBehaviour
 
     void SpawnZombie()
     {
-        Transform selectedPoint = (Random.value < 0.8f) ? doorSpawnPoint : kitchenSpawnPoint;
-        if (selectedPoint != null)
+        // Väljer en helt slumpmässig punkt från listan
+        if (zombieSpawnPoints.Length > 0)
         {
-            Instantiate(zombiePrefab, selectedPoint.position, selectedPoint.rotation);
-            zombiesAlive++;
+            int randomIndex = Random.Range(0, zombieSpawnPoints.Length);
+            Transform selectedPoint = zombieSpawnPoints[randomIndex];
+
+            if (selectedPoint != null)
+            {
+                Instantiate(zombiePrefab, selectedPoint.position, selectedPoint.rotation);
+                zombiesAlive++;
+            }
         }
     }
 
@@ -75,11 +86,9 @@ public class WaveManager : MonoBehaviour
         zombiesAlive--;
         if (zombiesAlive <= 0 && !isSpawning)
         {
-            // 1. VISA KORTET FÖRST (med nuvarande wave-nummer)
             if (GameUIHandler.instance != null)
                 GameUIHandler.instance.ShowWaveComplete(currentWave);
 
-            // 2. ÖKA SIFFRAN EFTERÅT (för nästa runda)
             currentWave++;
             UpdateHUD();
             StartCoroutine(SpawnWaveRoutine());
