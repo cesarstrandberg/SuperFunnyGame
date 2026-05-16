@@ -9,10 +9,7 @@ public class WaveManager : MonoBehaviour
     [Header("Referenser")]
     public GameObject zombiePrefab;
     public GameObject whiskyPrefab;
-
-    // Nu använder vi en lista för alla dina hörn/platser
     public Transform[] zombieSpawnPoints;
-
     public Transform[] whiskySpawnPoints;
     public TextMeshProUGUI currentWaveDisplayText;
 
@@ -45,7 +42,6 @@ public class WaveManager : MonoBehaviour
     {
         RespawnWhisky();
 
-        // Fix för Wave 1: Vänta 4 sekunder extra bara i början
         float initialDelay = (currentWave == 1) ? 4f : 0f;
         yield return new WaitForSeconds(timeBetweenWaves + initialDelay);
 
@@ -67,7 +63,6 @@ public class WaveManager : MonoBehaviour
 
     void SpawnZombie()
     {
-        // Väljer en helt slumpmässig punkt från listan
         if (zombieSpawnPoints.Length > 0)
         {
             int randomIndex = Random.Range(0, zombieSpawnPoints.Length);
@@ -75,6 +70,15 @@ public class WaveManager : MonoBehaviour
 
             if (selectedPoint != null)
             {
+                // --- HÄR LÄGGER VI IN RÖKEN ---
+                // Den letar efter Particle Systemet som du la som barn till spawn-punkten
+                ParticleSystem smokeVFX = selectedPoint.GetComponentInChildren<ParticleSystem>();
+                if (smokeVFX != null)
+                {
+                    smokeVFX.Play();
+                }
+                // ------------------------------
+
                 Instantiate(zombiePrefab, selectedPoint.position, selectedPoint.rotation);
                 zombiesAlive++;
             }

@@ -16,9 +16,13 @@ public class EnemyAI : MonoBehaviour
     public float attackRate = 1.2f;
     public float enemyDamage = 15f;
 
+    [Header("Sami's Sight System")]
+    public float sightRange = 12f;      // Hur långt bort de kan se dig
+    public bool hasDetectedPlayer = false; // Börjar som false (de sover/väntar)
+
     private bool isDead = false;
     private float nextAttackTime = 0f;
-    private PlayerHealth playerHealth; // NY: Referens till spelarens hälsa
+    private PlayerHealth playerHealth;
 
     void Start()
     {
@@ -28,27 +32,39 @@ public class EnemyAI : MonoBehaviour
             if (p != null) player = p.transform;
         }
 
-        // Hämta hälso-skriptet från spelaren
         if (player != null) playerHealth = player.GetComponent<PlayerHealth>();
     }
 
     void Update()
     {
-        // 1. Kolla om fienden är död ELLER om spelaren är död
         if (isDead || (playerHealth != null && playerHealth.isDead))
         {
-            // Stoppa bara om vi faktiskt är på banan (NavMesh)
             if (agent.enabled && agent.isOnNavMesh) agent.isStopped = true;
-
-            // Se till att zombien slutar spela sin spring-animation
             anim.SetFloat("Speed", 0);
             return;
         }
 
-        // 2. Beräkna avstånd till Patrick
         float distance = Vector3.Distance(transform.position, player.position);
 
-        // 3. Attack-logik
+        // --- NYTT: DETEKTIONS-LOGIK ---
+        if (!hasDetectedPlayer)
+        {
+            // Om spelaren kommer inom synhåll, eller om vi blir träffade (sker i TakeDamage)
+            if (distance <= sightRange)
+            {
+                hasDetectedPlayer = true;
+            }
+            else
+            {
+                // Om vi inte sett spelaren än: Stå still och gör inget
+                if (agent.enabled && agent.isOnNavMesh) agent.isStopped = true;
+                anim.SetFloat("Speed", 0);
+                return;
+            }
+        }
+        // ------------------------------
+
+        // Härifrån och neråt är din ORIGINAL-LOGIK helt orörd!
         if (distance <= attackDistance)
         {
             if (agent.enabled && agent.isOnNavMesh) agent.isStopped = true;
@@ -60,7 +76,6 @@ public class EnemyAI : MonoBehaviour
                 nextAttackTime = Time.time + attackRate;
             }
         }
-        // 4. Jaga-logik
         else
         {
             MoveToPlayer();
@@ -85,13 +100,16 @@ public class EnemyAI : MonoBehaviour
     void DealDamage()
     {
         if (isDead) return;
-        // Vi TakeDamage sköter kollen internt om vi kan ta skada
         if (playerHealth != null) playerHealth.TakeDamage(enemyDamage);
     }
 
     public void TakeDamage(int damage)
     {
         if (isDead) return;
+
+        // Pro-tip: Om Patrick hugger dem, fattar de direkt var han är!
+        hasDetectedPlayer = true;
+
         health -= damage;
         if (health <= 0.1f) Die();
         else anim.SetTrigger("Hit");
@@ -102,13 +120,9 @@ public class EnemyAI : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        // Denna rad säger till räknaren att lägga till ett poäng:
-        if (KillCounter.instance != null)
-        {
-            KillCounter.instance.AddKill();
-        }
-
+        if (KillCounter.instance != null) KillCounter.instance.AddKill();
         if (WaveManager.instance != null) WaveManager.instance.EnemyDied();
+
         agent.isStopped = true;
         agent.enabled = false;
         anim.SetTrigger("Die");
