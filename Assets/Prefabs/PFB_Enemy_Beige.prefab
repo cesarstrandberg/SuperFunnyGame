@@ -331,6 +331,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       insertIndex: -1
       addedObject: {fileID: 466619080459961278}
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2666450334966646842}
     - targetCorrespondingSourceObject: {fileID: 100008, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2773817947247858066}
@@ -998,6 +1001,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2666450334966646842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758771974415959021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8c81e5ddad86a644b135492178c30f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyOutfit
+  zombieRenderer: {fileID: 13700000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
+  vanligBeigeMaterial: {fileID: 2100000, guid: 4ef944738df6cd34285471b45a6884a5, type: 2}
+  svartMaterial: {fileID: 2100000, guid: 6d93764a2cea15f4c8e450404f0184e9, type: 2}
+  blaMaterial: {fileID: 2100000, guid: 018d85dbeca3d02439e054f2b01514aa, type: 2}
+  morkBlaMaterial: {fileID: 2100000, guid: 05db7e8e3fd5d714293cc91785ee5229, type: 2}
+  randigMaterial: {fileID: 2100000, guid: 820722df39781f44192e5b9e7b0fe8ed, type: 2}
+  svartChans: 20
+  blaChans: 20
+  morkBlaChans: 15
+  randigChans: 5
 --- !u!1 &4758771974415959037 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100016, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
