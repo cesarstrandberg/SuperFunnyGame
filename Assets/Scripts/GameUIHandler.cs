@@ -1,6 +1,6 @@
-using UnityEngine;
 using System.Collections;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameUIHandler : MonoBehaviour
@@ -13,11 +13,11 @@ public class GameUIHandler : MonoBehaviour
 
     [Header("UI Texter")]
     public TextMeshProUGUI waveCompletedText;
+    public TextMeshProUGUI finalScoreDisplayText; // Kom ihåg att dra in textrutan på ditt DeathCard här!
 
-    //// NYA RADER HÄR ////
+    [Header("Ljud")]
     public AudioSource playerVoiceSource;
     public AudioClip waveCompleteQuote;
-    //////////////////////
 
     void Awake() { instance = this; }
 
@@ -27,12 +27,11 @@ public class GameUIHandler : MonoBehaviour
         {
             if (waveCompletedText != null)
             {
-                waveCompletedText.text = "WAVE " + waveNum + " COMPLETED";
+                waveCompletedText.text = "WAVE " + (waveNum - 1) + " COMPLETED";
             }
 
-            //// NY RAD HÄR ////
-            if (playerVoiceSource != null && waveCompleteQuote != null) playerVoiceSource.PlayOneShot(waveCompleteQuote);
-            ////////////////////
+            if (playerVoiceSource != null && waveCompleteQuote != null)
+                playerVoiceSource.PlayOneShot(waveCompleteQuote);
 
             StopAllCoroutines();
             StartCoroutine(WaveCardRoutine());
@@ -49,6 +48,22 @@ public class GameUIHandler : MonoBehaviour
     public void ShowGameOver(int finalScore)
     {
         if (deathCard != null) deathCard.SetActive(true);
+
+        // FIX: Hämtar nu datan direkt från WaveManager så det blir stenhårt rätt!
+        if (finalScoreDisplayText != null)
+        {
+            int wavesCleared = finalScore - 1;
+
+            if (WaveManager.instance != null)
+            {
+                wavesCleared = WaveManager.instance.currentWave - 1;
+            }
+
+            if (wavesCleared < 0) wavesCleared = 0; // Säkerhetsbälte
+
+            finalScoreDisplayText.text = "WAVES SURVIVED: " + wavesCleared;
+        }
+
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

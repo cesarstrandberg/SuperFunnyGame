@@ -57,7 +57,7 @@ public class AxeSwing : MonoBehaviour
         if (animator != null) animator.SetTrigger("Swing");
         if (swingSound && sfxSource != null) sfxSource.PlayOneShot(swingSound);
 
-        Vector3 origin = cam.position + cam.forward * 0.5f;
+        Vector3 origin = cam.position + cam.forward * 0.9f;
         Vector3 direction = cam.forward;
         RaycastHit hit;
 
