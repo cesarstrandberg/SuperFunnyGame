@@ -15,6 +15,9 @@ public class GameUIHandler : MonoBehaviour
     [Header("UI Texter")]
     public TextMeshProUGUI waveCompletedText;
 
+    [Header("NYTT: Muslåsnings-UI")]
+    public TextMeshProUGUI lockMouseTextUI;
+
     [Header("Ljud (Rundor)")]
     public AudioSource playerVoiceSource;
     public AudioClip waveCompleteQuote;
@@ -25,6 +28,16 @@ public class GameUIHandler : MonoBehaviour
     public AudioClip victoryQuoteClip;    // Det sista episka Bateman-vinstcitatet!
 
     void Awake() { instance = this; }
+
+    void Update()
+    {
+        // FIX: Om texten är inlagd, kolla om musen är olåst. 
+        // Om Cursor.lockState INTE är Locked, så blir SetActive(true) och texten tänds!
+        if (lockMouseTextUI != null)
+        {
+            lockMouseTextUI.gameObject.SetActive(Cursor.lockState != CursorLockMode.Locked);
+        }
+    }
 
     public void ShowWaveComplete(int waveNum)
     {
