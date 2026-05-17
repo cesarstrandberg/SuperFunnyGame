@@ -10,14 +10,19 @@ public class GameUIHandler : MonoBehaviour
     [Header("UI Paneler")]
     public GameObject waveCard;
     public GameObject deathCard;
-    public GameObject victoryCard; // NY: Skapa en panel för vinstskärmen och dra in den här!
+    public GameObject victoryCard; // Skapa din vinstpanel under Canvas och dra in den här!
 
     [Header("UI Texter")]
     public TextMeshProUGUI waveCompletedText;
 
-    [Header("Ljud")]
+    [Header("Ljud (Rundor)")]
     public AudioSource playerVoiceSource;
     public AudioClip waveCompleteQuote;
+
+    [Header("NYTT: Ljud (Vinstskärm)")]
+    public AudioSource victoryAudioSource; // Dra in din spelares röstkälla eller en separat AudioSource här
+    public AudioClip victorySFXClip;      // Ditt check-ljud/pling när man vinner!
+    public AudioClip victoryQuoteClip;    // Det sista episka Bateman-vinstcitatet!
 
     void Awake() { instance = this; }
 
@@ -53,10 +58,18 @@ public class GameUIHandler : MonoBehaviour
         Cursor.visible = true;
     }
 
-    // NY FUNKTION: Visar vinstskärmen när man rör ytterdörren!
+    // UPPDATERAD: Fyrar nu av vinstljuden och citatet i samma millisekund som man klarar spelet!
     public void ShowVictory()
     {
         if (victoryCard != null) victoryCard.SetActive(true);
+
+        // Spela upp vinstljuden direkt på din AudioSource
+        if (victoryAudioSource != null)
+        {
+            if (victorySFXClip != null) victoryAudioSource.PlayOneShot(victorySFXClip);
+            if (victoryQuoteClip != null) victoryAudioSource.PlayOneShot(victoryQuoteClip);
+        }
+
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

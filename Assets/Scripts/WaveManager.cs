@@ -23,23 +23,25 @@ public class WaveManager : MonoBehaviour
     public TextMeshProUGUI pause1TextUI;
     public TextMeshProUGUI pause2TextUI;
     public TextMeshProUGUI pause3TextUI;
-    public TextMeshProUGUI pause4TextUI;    // Skriv "Just a blown fuse..." här!
-    public TextMeshProUGUI pause5TextUI;    // Skriv "RUN TO THE DOOR!" här!
+    public TextMeshProUGUI pause4TextUI;
+    public TextMeshProUGUI pause5TextUI;
 
     [Header("Intro Kamera & Ljud")]
     public GameObject zoomCamera;
     public AudioSource zombieSFXSource;
-    public AudioClip zombieGrowlClip;       // Det feta intro-vrålet
+    public AudioClip zombieGrowlClip;
 
-    [Header("Zombie Spawn Varselljud (3D)")]
+    [Header("Zombie Ljudinställningar (3D)")]
     public AudioClip zombieSpawnSubtleClip;
     [Range(0f, 1f)] public float zombieSpawnVolume = 0.4f;
-    public AudioClip zombieDefaultRosselClip; // Lågt rossel som loopar på zombierna!
+    public AudioClip zombieDefaultRosselClip;
+    [Range(0f, 1f)] public float zombieIdleVolume = 0.05f; // NY: Kontrollera "väggljudet" separat här!
 
-    [Header("Skräck-inställningar (Lampor)")]
+    [Header("Skräck-inställningar (NYTT: GameObjects för finalen!)")]
     public Light kitchenLight;
     public Light ceilingLight;
-    public Light doorLight;                   // Lampan vid ytterdörren
+    public GameObject doorLightObject;        // FIX: Ändrad till GameObject så den kan väckas ur Hierarkin!
+    public GameObject escapeDoorObject;       // FIX: Ändrad till GameObject så den kan väckas ur Hierarkin!
 
     [Header("Skräck-inställningar (Musik)")]
     public AudioSource musicBoxSource;
@@ -80,7 +82,11 @@ public class WaveManager : MonoBehaviour
     void Start()
     {
         UpdateHUD();
-        if (doorLight != null) doorLight.enabled = false;
+
+        // Se till att dörren och dörrlampan är HELT avstängda i starten
+        if (escapeDoorObject != null) escapeDoorObject.SetActive(false);
+        if (doorLightObject != null) doorLightObject.SetActive(false);
+
         StartCoroutine(SpawnWaveRoutine());
     }
 
@@ -104,14 +110,11 @@ public class WaveManager : MonoBehaviour
             if (welcomeTextUI != null) welcomeTextUI.gameObject.SetActive(false);
             if (companyTextUI != null) companyTextUI.gameObject.SetActive(true);
 
-            // FIX: Hittar köksspawnen och spelar growl-ljudet i 3D därifrån innan zombien skapas!
             Transform kitchenSpot = FindSpawnPointByName("KitchenSpawn");
             Vector3 soundPos = (kitchenSpot != null) ? kitchenSpot.position : Vector3.zero;
 
             if (zombieGrowlClip != null)
-            {
                 AudioSource.PlayClipAtPoint(zombieGrowlClip, soundPos, zombieSpawnVolume * 1.2f);
-            }
 
             yield return new WaitForSeconds(3f);
             if (companyTextUI != null) companyTextUI.gameObject.SetActive(false);
@@ -125,12 +128,15 @@ public class WaveManager : MonoBehaviour
 
             if (avklaradVag == 5)
             {
-                Debug.Log("Våg 5 klar! INSTANT BLACKOUT! RUN TO THE DOOR!");
+                Debug.Log("Våg 5 klar! FINALEN STARTAR!");
                 if (pause5TextUI != null) pause5TextUI.gameObject.SetActive(true);
 
                 if (kitchenLight != null) kitchenLight.enabled = false;
                 if (ceilingLight != null) ceilingLight.enabled = false;
-                if (doorLight != null) doorLight.enabled = true;
+
+                // FIX: Nu aktiverar vi objekten på RIKTIGT i Hierarkin så de syns!
+                if (doorLightObject != null) doorLightObject.SetActive(true);
+                if (escapeDoorObject != null) escapeDoorObject.SetActive(true);
 
                 if (musicBoxSource != null)
                 {
@@ -179,7 +185,7 @@ public class WaveManager : MonoBehaviour
                 }
                 else if (avklaradVag == 4)
                 {
-                    Debug.Log("Våg 4 klar! Ger PlayerAmateur +50 HP inför Våg 5.");
+                    Debug.Log("Våg 4 klar! Ger PlayerAmateur +50 HP.");
                     GivePlayerHealthBoost(50);
 
                     if (pause4TextUI != null) pause4TextUI.gameObject.SetActive(true);
@@ -229,7 +235,6 @@ public class WaveManager : MonoBehaviour
     IEnumerator SpawnFinalEscapeWaveRoutine()
     {
         isSpawning = true;
-
         Transform kitchenSpot = FindSpawnPointByName("KitchenSpawn");
         Transform chairSpot = FindSpawnPointByName("CornerChairSpawn");
 
@@ -238,13 +243,11 @@ public class WaveManager : MonoBehaviour
             if (kitchenSpot != null) SpawnZombieAtSpecificTransform(kitchenSpot);
             yield return new WaitForSeconds(3.0f);
         }
-
         for (int i = 0; i < 2; i++)
         {
             if (chairSpot != null) SpawnZombieAtSpecificTransform(chairSpot);
             yield return new WaitForSeconds(1.5f);
         }
-
         isSpawning = false;
     }
 
@@ -262,20 +265,16 @@ public class WaveManager : MonoBehaviour
         ParticleSystem smokeVFX = targetSpot.GetComponentInChildren<ParticleSystem>();
         if (smokeVFX != null) smokeVFX.Play();
 
-        // 1. Spela det korta, subtila spawn-varselljudet (3D)
         if (zombieSpawnSubtleClip != null)
             AudioSource.PlayClipAtPoint(zombieSpawnSubtleClip, targetSpot.position, zombieSpawnVolume);
 
-        // FIX: Borttaget det repeterande zombieGrowlClip-anropet härifrån så det inte spelas på varje klon!
-
         GameObject zombie = Instantiate(zombiePrefab, targetSpot.position, targetSpot.rotation);
 
-        // 3. Lägg på det loopande rosslet på klonen
         if (zombieDefaultRosselClip != null)
         {
             AudioSource rosselSource = zombie.AddComponent<AudioSource>();
             rosselSource.clip = zombieDefaultRosselClip;
-            rosselSource.volume = zombieSpawnVolume * 0.5f;
+            rosselSource.volume = zombieIdleVolume; // ANVÄNDER DEN NYA VOLYMEN!
             rosselSource.spatialBlend = 1.0f;
             rosselSource.minDistance = 1f;
             rosselSource.maxDistance = 10f;
@@ -293,7 +292,7 @@ public class WaveManager : MonoBehaviour
             var healthScript = playerAmateur.GetComponent<PlayerHealth>();
             if (healthScript != null)
             {
-                Debug.Log("Hälsa boostad med +50 enheter!");
+                Debug.Log("Hälsa boostad!");
             }
         }
     }
@@ -404,4 +403,4 @@ public class WaveManager : MonoBehaviour
             spawnPos = hit.point + Vector3.up * yOffset;
         Instantiate(whiskyPrefab, spawnPos, spot.rotation);
     }
-}
+} // Sista måsvingen stänger klassen perfekt på rad 302!

@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class EscapeDoor : MonoBehaviour
 {
+    private void Start()
+    {
+        if (GetComponent<Collider>() == null || !GetComponent<Collider>().isTrigger)
+        {
+            Debug.LogError(gameObject.name + " måste ha en Box Collider där 'Is Trigger' är ikryssad!");
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        // Kolla om det är spelaren som kliver in i dörren
         if (other.CompareTag("Player"))
         {
-            // Dörren är BARA aktiv om vi har nått sista vågen (Våg 5)
-            if (WaveManager.instance != null && WaveManager.instance.currentWave == 66)
+            // Vi är på Våg 6 (Finalen) och spelaren kliver in i dörren!
+            if (WaveManager.instance != null && WaveManager.instance.currentWave == 6)
             {
-                Debug.Log("SPELAREN DETEKTERAD VID DÖRREN! VINST!");
+                Debug.Log("SPELAREN DETEKTERAD VID YTTERDÖRREN. ANROPAR VINST!");
                 if (GameUIHandler.instance != null)
                 {
                     GameUIHandler.instance.ShowVictory();
