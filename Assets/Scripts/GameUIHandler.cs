@@ -1,6 +1,6 @@
+using UnityEngine;
 using System.Collections;
 using TMPro;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameUIHandler : MonoBehaviour
@@ -10,10 +10,10 @@ public class GameUIHandler : MonoBehaviour
     [Header("UI Paneler")]
     public GameObject waveCard;
     public GameObject deathCard;
+    public GameObject victoryCard; // NY: Skapa en panel för vinstskärmen och dra in den här!
 
     [Header("UI Texter")]
     public TextMeshProUGUI waveCompletedText;
-    public TextMeshProUGUI finalScoreDisplayText; // Kom ihåg att dra in textrutan på ditt DeathCard här!
 
     [Header("Ljud")]
     public AudioSource playerVoiceSource;
@@ -48,22 +48,15 @@ public class GameUIHandler : MonoBehaviour
     public void ShowGameOver(int finalScore)
     {
         if (deathCard != null) deathCard.SetActive(true);
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
-        // FIX: Hämtar nu datan direkt från WaveManager så det blir stenhårt rätt!
-        if (finalScoreDisplayText != null)
-        {
-            int wavesCleared = finalScore - 1;
-
-            if (WaveManager.instance != null)
-            {
-                wavesCleared = WaveManager.instance.currentWave - 1;
-            }
-
-            if (wavesCleared < 0) wavesCleared = 0; // Säkerhetsbälte
-
-            finalScoreDisplayText.text = "WAVES SURVIVED: " + wavesCleared;
-        }
-
+    // NY FUNKTION: Visar vinstskärmen när man rör ytterdörren!
+    public void ShowVictory()
+    {
+        if (victoryCard != null) victoryCard.SetActive(true);
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
